@@ -346,8 +346,10 @@ export function TokenFeed() {
         {(() => {
           const now = Date.now();
           const decorate = (t: any) => {
-            const { filtered, raw } = computeTotals(t, holdMins, now);
-            return { ...t, filteredTotal: filtered, rawTotal: raw, total: filtered, volume: String(filtered) };
+                        const { filtered, raw, anyHoldActive } = computeTotals(t, holdMins, now);
+            // Se filtro de hold estiver ativo e nada passou (filtered=0), usa fallback para o bruto
+            const total = anyHoldActive ? (filtered > 0 ? filtered : raw) : raw;
+            return { ...t, filteredTotal: filtered, rawTotal: raw, total, volume: String(total) };
           };
           const list = (loading ? mockTokens : tokens).map(decorate)
             .filter((t: any) => {
@@ -419,8 +421,8 @@ function mapMintCardToRowData(card: MintCard) {
   } catch {}
   const type = card.type_label || getTypeFromSource(card.source_url || '');
   const tableData = wallets.map(w => ({
-    // Guardamos timestamp para exibir "how old" na tabela
-    timestamp: (w.last_seen || 0) * 1000,
+    // Guardamos timestamp para exibir "how old"; preferir first_seen
+    timestamp: ((w as any).first_seen || w.last_seen || 0) * 1000,
     // Mantemos o horário absoluto para tooltip
     hora: new Date((w.last_seen || 0) * 1000).toLocaleTimeString(),
     // "Tipo" deve refletir a origem (AG/DORMANT/SNS/...)
