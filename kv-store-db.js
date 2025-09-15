@@ -4,8 +4,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Configuração do Supabase
-const supabaseUrl = process.env.SUPABASE_URL || 'https://saeuypetnnvvkilqquye.supabase.co';
-const supabaseKey = process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhZXV5cGV0bm52dmtpbHFxdXllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc1MjU0OTAsImV4cCI6MjA3MzEwMTQ5MH0.TIaLYP59KmpAnZKOF_qxfSySGvXncWIUCEeN0xGJ_gs';
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_ANON_KEY;
 
 // Criar cliente Supabase
 const supabase = createClient(supabaseUrl, supabaseKey);
