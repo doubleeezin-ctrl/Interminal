@@ -1,0 +1,15 @@
+[projects."/Users/PC"]
+
+hide_agent_reasoning = false   # defaults to false
+
+[projects.'\\?\C:\Users\PC\Documents\AI']
+trust_level = "trusted"
+
+[mcp_servers.playwright]
+args = ["@playwright/mcp@latest", "--extension"]
+command = "C:\\Program Files\\nodejs\\npx.cmd"
+
+
+[mcp_servers.context7]
+args = ["-y", "@upstash/context7-mcp"]
+command = "C:\\Program Files\\nodejs\\npx.cmd"

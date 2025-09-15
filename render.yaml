@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: vitrine-app
+    env: node
+    plan: free
+    region: oregon
+    autoDeploy: true
+    buildCommand: |
+      npm ci
+      npm ci --prefix web
+      npm run build --prefix web
+    startCommand: node backend.js
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: HELIUS_KEY
+        sync: false
+      - key: JUP_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: LOG_API_RESPONSES
+        value: 'false'
