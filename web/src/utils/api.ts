@@ -1,5 +1,10 @@
-export const API_URL = (import.meta.env.VITE_API_URL ?? '').trim() || '';
-
+// Base da API:
+// - Em dev, pode usar VITE_API_URL (ex.: http://localhost:3000)
+// - Em produção, ignoramos valores de localhost para usar a mesma origem
+const RAW_API = (import.meta.env.VITE_API_URL ?? '').trim();
+const IS_LOCAL_HOST = /^https?:\/\/(localhost|127\.0\.0\.1)(?::\d+)?(\/|$)/i.test(RAW_API);
+const BASE_API = import.meta.env.PROD && IS_LOCAL_HOST ? '' : RAW_API;
+export const API_URL = BASE_API.replace(/\/+$|^\/$/g, '');
 async function getJson<T>(path: string): Promise<T> {
   const res = await fetch(`${API_URL}${path}`);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
