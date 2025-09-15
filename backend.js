@@ -7,9 +7,9 @@ import { insertTransactionBatch, getExistingSignatures, testConnection, getBySig
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const HELIUS_KEY = process.env.HELIUS_KEY || '559dea44-777a-44e8-b3fc-6d83effa4614';
+const HELIUS_KEY = process.env.HELIUS_KEY;
 const JUP_BASE_URL = process.env.JUP_BASE_URL || 'https://api.jup.ag';
-const JUP_KEY = process.env.JUP_KEY || '02aeb2c9-adab-4a74-84ff-28b736da1bd3';
+const JUP_KEY = process.env.JUP_KEY;
 const JUP_REFRESH_ENABLED = (process.env.JUP_REFRESH_ENABLED || 'true').toLowerCase() !== 'false';
 const JUP_REFRESH_BATCH_SIZE = parseInt(process.env.JUP_REFRESH_BATCH_SIZE || '50', 10);
 const JUP_REFRESH_RPS = parseInt(process.env.JUP_REFRESH_RPS || '3', 10); // for search batches
